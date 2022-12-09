@@ -1,5 +1,6 @@
-from NaiveBayes import NaiveBayes
 import pandas as pd
+from naive_bayes import NaiveBayes
+
 
 
 def test_traivial():
@@ -10,7 +11,7 @@ def test_traivial():
             'target': ['F', 'F', 'T', 'F']
         }
     )
-    clf = NaiveBayes().fit(train_data, 'target')
+    clf = NaiveBayes().fit(train_data.drop('target', axis=1), train_data['target'])
 
     test_data = {
             'F': 2/3 * 1/3 * 3/4,
