@@ -29,8 +29,10 @@ class NaiveBayes:
             return []
 
         res_pred_rows = []
+        
         for _, row in X.iterrows():
-            class_probs = []
+            guess = None
+            class_prob = -1
             for c in self.classes.unique():
                 p = self.priors[c]
                 for col in X.columns:
@@ -38,6 +40,9 @@ class NaiveBayes:
                             (col, row[col], c),
                             1 / self.length #default occurence is 1
                         )
-                class_probs.append((c, p))
-            res_pred_rows.append(class_probs)
+                if p > class_prob:
+                    class_prob = p
+                    guess = c
+                print(((c, p)))
+            res_pred_rows.append(guess)
         return res_pred_rows
